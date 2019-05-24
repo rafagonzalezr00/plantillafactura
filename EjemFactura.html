@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ejemplo Factura</title>
+    <style>
+        body
+        {
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(3, 1fr);
+            width: 50%;
+            margin-left: 25%;
+        }
+        table.datos
+        { 
+            position: absolute;
+            border-collapse: collapse;
+            border: 2px solid black;
+            left: 10%;
+        }
+        table.content
+        { 
+            border-collapse: collapse;
+            border: 2px solid black;
+            margin-top: 25%;
+        }
+        th,td
+        {
+            border-collapse: collapse;
+            border: 2px solid black;
+            text-align: center;
+        }
+        #boton
+        {
+            width: 10%;
+        }
+        img
+        {
+            position: absolute;
+            width: 15%;
+            margin-left: 35%;
+            margin-top: -8%;
+        }
+        div.form
+        {
+            display: flex;
+            position: absolute;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("input").click(function(){
+                var subtotal = 0;
+                var iva=0;
+                var total=0;
+                $(".tot1").each(function(){
+                    var precio=0, cant=0, multi=0;
+                    precio = $("#preci").val();
+                    cant = $("#cant").val();
+                    multi = precio*cant;
+                    $(this).val(multi + " €");
+                    subtotal = subtotal+multi;
+                });
+                iva=subtotal*0.21;
+                total=subtotal+iva;
+                $("#sub").val(subtotal + " €");
+                $("#iva").val(iva + " €");
+                $("#tot").val(total + " €");
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="form">
+        <table id="datos">
+            <tr>
+                <td colspan="2">Nombre: <input type="text" value="Nombre" size="47"></td>
+            </tr>
+            <tr>
+                <td>CIF/NIF: <input type="text" value="CIF/NIF" size="15"></td>
+                <td>Teléfono: <input type="text" value="Teléfono Contacto" size="16"></td>
+            </tr>
+            <tr>
+                <td colspan="2">Dirección: <input type="text" value="Dirección" size="45"></td>
+            </tr>
+        </table>
+        <img src="https://d2jljza7x0a5yy.cloudfront.net/media/k2/items/cache/2f1aaeae7d91f4ef965d370291e79536_XL.jpg?t=1546966450">
+    </div>
+    <table id="content">
+        <tr>
+            <th>Unidades</th>
+            <th>Descripción</th>
+            <th>Precio/Unidad</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td><input type="text" id="cant" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="desc" value="" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="preci" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" class="tot1" value="00" disabled size="10%" style="text-align: center"></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="cant" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="desc" value="" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="preci" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" class="tot2" value="00" disabled size="10%" style="text-align: center"></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="cant" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="desc" value="" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="preci" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" class="tot3" value="00" disabled size="10%" style="text-align: center"></td>
+        </tr>
+        <tr>
+            <td><input type="text" id="cant" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="desc" value="" size="10%" style="text-align: center"></td>
+            <td><input type="text" id="preci" value="00" size="10%" style="text-align: center"></td>
+            <td><input type="text" class="tot4" value="00" disabled size="10%" style="text-align: center"></td>
+        </tr>
+    </table>
+    <div id="result">
+        <table>
+            <tr>
+                <td>Subtotal</td>
+                <td><input type="text" id="sub" value="00" disabled size="10%" style="text-align: center"></td>
+            </tr>
+            <tr>
+                <td>IVA (21%)</td>
+                <td><input type="text" id="iva" value="00" disabled size="10%" style="text-align: center"></td>
+            </tr>
+            <tr>
+                <td>Total Factura</td>
+                <td><input type="text" id="tot" value="00" disabled size="10%" style="text-align: center"></td>
+            </tr>
+        </table>
+        <button id="boton">Calcular Todo</button>
+    </div>
+</body>
+</html>
